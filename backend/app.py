@@ -1,55 +1,25 @@
 from flask import Flask
 from flask_cors import CORS
-from flask import request
-import google.generativeai as genai
-import os
-from dotenv import load_dotenv
 
-load_dotenv()
-
-genai.configure(
-    api_key=os.getenv(
-        "GEMINI_API_KEY"
-    )
-)
-
-model = genai.GenerativeModel(
-    "gemini-1.5-flash"
-)
+from routes import email_bp
 
 app = Flask(__name__)
 
 CORS(app)
 
-@app.route("/generate",
-methods=["POST"])
+app.register_blueprint(email_bp)
 
-def generate():
+@app.route("/")
 
-    data = request.json
-
-    purpose = data["purpose"]
-    details = data["details"]
-
-    prompt = f"""
-    Write an email.
-
-    Purpose:
-    {purpose}
-
-    Details:
-    {details}
-    """
-
-    response = model.generate_content(
-        prompt
-    )
-
+def home():
     return {
-        "email":
-        response.text
+        "status":"success",
+        "message":"AI Email Writer Backend Running"
     }
 
 if __name__ == "__main__":
-
-    app.run(debug=True)
+    app.run(
+        host="0.0.0.0",
+        port=5000,
+        debug=True
+    )
