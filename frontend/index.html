@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Email Writer</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="card">
+
+            <h1>AI Email Writer</h1>
+
+            <p class="subtitle">
+                Generate professional emails using AI
+            </p>
+
+            <div class="form-group">
+
+                <label>Email Purpose</label>
+
+                <input
+                    type="text"
+                    id="purpose"
+                    placeholder="Example: Leave Request">
+            </div>
+
+            <div class="form-group">
+
+                <label>Key Details</label>
+
+                <textarea
+                    id="details"
+                    placeholder="Enter all details here"></textarea>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Select Tone</label>
+
+                <select id="tone">
+
+                    <option value="Formal">
+                        Formal
+                    </option>
+
+                    <option value="Professional">
+                        Professional
+                    </option>
+
+                    <option value="Polite">
+                        Polite
+                    </option>
+
+                    <option value="Casual">
+                        Casual
+                    </option>
+
+                </select>
+
+            </div>
+
+            <button id="generateBtn">
+
+                Generate Email
+
+            </button>
+
+            <div
+                id="loader"
+                class="loader hidden">
+
+                Generating Email...
+
+            </div>
+
+            <div class="output-section">
+
+                <div class="output-header">
+
+                    <h2>Generated Email</h2>
+
+                    <div>
+
+                        <button id="copyBtn">
+
+                            Copy
+
+                        </button>
+
+                        <button id="downloadBtn">
+
+                            Download
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <pre id="output">
+
+Your generated email will appear here...
+
+                </pre>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>
