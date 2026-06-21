@@ -2,66 +2,111 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
     <title>AI Email Writer</title>
 
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet"
+          href="css/style.css">
+
 </head>
 
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <h1>AI Email Writer</h1>
+    <div class="card">
+
+        <div class="hero">
+
+            <h1>📧 AI-Powered Email Writer</h1>
+
+            <p>
+                Generate professional emails using an AI-powered email generation system
+            </p>
+
+            <p class="subtitle">
+
+                An intelligent email generation system that creates
+                professional emails based on purpose, details and tone.
+
+            </p>
+        </div>
 
         <label>Email Purpose</label>
 
         <input
             type="text"
             id="purpose"
-            placeholder="Leave Request">
+            placeholder="Example: Leave Request, Job Application, Meeting Request...">
 
-        <label>Details</label>
+        <label>Key Details</label>
 
         <textarea
             id="details"
             rows="6"
-            placeholder="Enter details">
+            placeholder="Enter all details here">
         </textarea>
 
-        <label>Tone</label>
+        <p id="charCount">
+            Characters: 0
+        </p>
+
+        <label>Select Tone</label>
 
         <select id="tone">
 
             <option>Formal</option>
+
             <option>Professional</option>
+
             <option>Polite</option>
+
             <option>Casual</option>
 
         </select>
 
-        <br><br>
+        <div class="button-group">
 
-        <button onclick="generateEmail()">
-            Generate Email
-        </button>
+            <button onclick="generateEmail()">
+                Generate Email
+            </button>
 
-        <button onclick="copyEmail()">
-            Copy
-        </button>
+            <button onclick="copyEmail()">
+                Copy
+            </button>
 
-        <button onclick="downloadEmail()">
-            Download
-        </button>
+            <button onclick="downloadEmail()">
+                Download
+            </button>
+
+            <button onclick="clearForm()">
+                Clear
+            </button>
+
+        </div>
 
         <h2>Generated Email</h2>
 
-        <pre id="output"></pre>
+        <pre id="output">
+            🚀 Your AI-generated email will appear here...
+        </pre>
+
+        <div class="footer">
+
+            © 2026 AI Email Writer | Developed by Vaishnavi Kola
+
+        </div>
 
     </div>
 
-    <script src="js/script.js"></script>
+</div>
+
+<script src="js/script.js"></script>
 
 </body>
 

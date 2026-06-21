@@ -14,22 +14,29 @@ def generate_email_content(
         tone):
 
     prompt = f"""
-Write a professional email.
+        You are a professional corporate email writer.
 
-Purpose:
-{purpose}
+        Generate a complete email.
 
-Details:
-{details}
+        Purpose:
+        {purpose}
 
-Tone:
-{tone}
+        Details:
+        {details}
 
-Generate:
-Subject:
-Body:
-"""
+        Tone:
+        {tone}
 
+        Requirements:
+
+        - Create a professional subject line.
+        - Create a proper greeting.
+        - Write a clear and professional email body.
+        - Add a suitable closing.
+        - Do not use placeholders.
+        - Return only the final email.
+        """
+    
     response = client.models.generate_content(
         model="gemini-2.5-flash",
         contents=prompt

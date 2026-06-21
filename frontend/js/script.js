@@ -1,26 +1,54 @@
+const detailsBox =
+    document.getElementById("details");
+
+const charCount =
+    document.getElementById("charCount");
+
+detailsBox.addEventListener(
+    "input",
+    () => {
+
+        charCount.textContent =
+            "Characters: " +
+            detailsBox.value.length;
+    }
+);
+
 async function generateEmail() {
 
     try {
 
         const purpose =
-            document.getElementById("purpose").value;
+            document.getElementById(
+                "purpose"
+            ).value;
 
         const details =
-            document.getElementById("details").value;
+            document.getElementById(
+                "details"
+            ).value;
 
         const tone =
-            document.getElementById("tone").value;
+            document.getElementById(
+                "tone"
+            ).value;
 
         if (!purpose || !details) {
 
-            alert("Please fill all fields");
+            alert(
+                "Please fill all fields"
+            );
 
             return;
         }
 
-        document.getElementById("output")
+        document
+            .getElementById(
+                "output"
+            )
             .textContent =
-            "Generating Email...";
+            `⏳ Generating Email... 
+            Please wait while AI writes your email...`;
 
         const response =
             await fetch(
@@ -30,7 +58,7 @@ async function generateEmail() {
 
                     headers: {
                         "Content-Type":
-                            "application/json"
+                        "application/json"
                     },
 
                     body: JSON.stringify({
@@ -47,7 +75,9 @@ async function generateEmail() {
         if (data.error) {
 
             document
-                .getElementById("output")
+                .getElementById(
+                    "output"
+                )
                 .textContent =
                 data.error;
 
@@ -55,7 +85,9 @@ async function generateEmail() {
         }
 
         document
-            .getElementById("output")
+            .getElementById(
+                "output"
+            )
             .textContent =
             data.email;
 
@@ -64,49 +96,91 @@ async function generateEmail() {
     catch (error) {
 
         document
-            .getElementById("output")
+            .getElementById(
+                "output"
+            )
             .textContent =
-            error;
+            "Error generating email";
     }
 }
-
 
 function copyEmail() {
 
     const text =
         document
-            .getElementById("output")
+            .getElementById(
+                "output"
+            )
             .textContent;
 
-    navigator.clipboard.writeText(text);
+    navigator.clipboard
+        .writeText(text);
 
-    alert("Copied");
+    alert(
+        "Email Copied Successfully!"
+    );
 }
-
 
 function downloadEmail() {
 
     const text =
         document
-            .getElementById("output")
+            .getElementById(
+                "output"
+            )
             .textContent;
 
     const blob =
         new Blob(
             [text],
             {
-                type: "text/plain"
+                type:
+                "text/plain"
             }
         );
 
     const a =
-        document.createElement("a");
+        document
+            .createElement("a");
 
     a.href =
-        URL.createObjectURL(blob);
+        URL.createObjectURL(
+            blob
+        );
 
     a.download =
-        "email.txt";
+        "generated_email.txt";
 
     a.click();
+}
+
+function clearForm() {
+
+    document
+        .getElementById(
+            "purpose"
+        )
+        .value = "";
+
+    document
+        .getElementById(
+            "details"
+        )
+        .value = "";
+
+    document
+        .getElementById(
+            "tone"
+        )
+        .selectedIndex = 0;
+
+    document
+        .getElementById(
+            "output"
+        )
+        .textContent =
+        "🚀 Your AI-generated email will appear here...";
+
+    charCount.textContent =
+        "Characters: 0";
 }
