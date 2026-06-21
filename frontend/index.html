@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>AI Email Writer</title>
 
     <link rel="stylesheet" href="css/style.css">
@@ -14,107 +13,51 @@
 
     <div class="container">
 
-        <div class="card">
+        <h1>AI Email Writer</h1>
 
-            <h1>AI Email Writer</h1>
+        <label>Email Purpose</label>
 
-            <p class="subtitle">
-                Generate professional emails using AI
-            </p>
+        <input
+            type="text"
+            id="purpose"
+            placeholder="Leave Request">
 
-            <div class="form-group">
+        <label>Details</label>
 
-                <label>Email Purpose</label>
+        <textarea
+            id="details"
+            rows="6"
+            placeholder="Enter details">
+        </textarea>
 
-                <input
-                    type="text"
-                    id="purpose"
-                    placeholder="Example: Leave Request">
-            </div>
+        <label>Tone</label>
 
-            <div class="form-group">
+        <select id="tone">
 
-                <label>Key Details</label>
+            <option>Formal</option>
+            <option>Professional</option>
+            <option>Polite</option>
+            <option>Casual</option>
 
-                <textarea
-                    id="details"
-                    placeholder="Enter all details here"></textarea>
+        </select>
 
-            </div>
+        <br><br>
 
-            <div class="form-group">
+        <button onclick="generateEmail()">
+            Generate Email
+        </button>
 
-                <label>Select Tone</label>
+        <button onclick="copyEmail()">
+            Copy
+        </button>
 
-                <select id="tone">
+        <button onclick="downloadEmail()">
+            Download
+        </button>
 
-                    <option value="Formal">
-                        Formal
-                    </option>
+        <h2>Generated Email</h2>
 
-                    <option value="Professional">
-                        Professional
-                    </option>
-
-                    <option value="Polite">
-                        Polite
-                    </option>
-
-                    <option value="Casual">
-                        Casual
-                    </option>
-
-                </select>
-
-            </div>
-
-            <button id="generateBtn">
-
-                Generate Email
-
-            </button>
-
-            <div
-                id="loader"
-                class="loader hidden">
-
-                Generating Email...
-
-            </div>
-
-            <div class="output-section">
-
-                <div class="output-header">
-
-                    <h2>Generated Email</h2>
-
-                    <div>
-
-                        <button id="copyBtn">
-
-                            Copy
-
-                        </button>
-
-                        <button id="downloadBtn">
-
-                            Download
-
-                        </button>
-
-                    </div>
-
-                </div>
-
-                <pre id="output">
-
-Your generated email will appear here...
-
-                </pre>
-
-            </div>
-
-        </div>
+        <pre id="output"></pre>
 
     </div>
 

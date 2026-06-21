@@ -1,78 +1,39 @@
-const generateBtn =
-document.getElementById(
-    "generateBtn"
-);
+async function generateEmail() {
 
-const loader =
-document.getElementById(
-    "loader"
-);
-
-const output =
-document.getElementById(
-    "output"
-);
-
-const copyBtn =
-document.getElementById(
-    "copyBtn"
-);
-
-const downloadBtn =
-document.getElementById(
-    "downloadBtn"
-);
-
-generateBtn.addEventListener(
-    "click",
-    async () => {
+    try {
 
         const purpose =
-        document.getElementById(
-            "purpose"
-        ).value.trim();
+            document.getElementById("purpose").value;
 
         const details =
-        document.getElementById(
-            "details"
-        ).value.trim();
+            document.getElementById("details").value;
 
         const tone =
-        document.getElementById(
-            "tone"
-        ).value;
+            document.getElementById("tone").value;
 
-        if(
-            !purpose ||
-            !details
-        ){
-            alert(
-                "Please fill all fields"
-            );
+        if (!purpose || !details) {
+
+            alert("Please fill all fields");
+
             return;
         }
 
-        loader.classList.remove(
-            "hidden"
-        );
+        document.getElementById("output")
+            .textContent =
+            "Generating Email...";
 
-        output.textContent =
-        "Generating...";
-
-        try{
-
-            const response =
+        const response =
             await fetch(
-                "http://127.0.0.1:5000/generate",
+                "http://127.0.0.1:5000/generate-email",
                 {
-                    method:"POST",
+                    method: "POST",
 
-                    headers:{
+                    headers: {
                         "Content-Type":
-                        "application/json"
+                            "application/json"
                     },
 
-                    body:JSON.stringify({
+                    body: JSON.stringify({
                         purpose,
                         details,
                         tone
@@ -80,77 +41,72 @@ generateBtn.addEventListener(
                 }
             );
 
-            const data =
+        const data =
             await response.json();
 
-            if(data.error){
+        if (data.error) {
 
-                output.textContent =
+            document
+                .getElementById("output")
+                .textContent =
                 data.error;
 
-            }else{
-
-                output.textContent =
-                data.email;
-
-            }
-
-        }
-        catch(error){
-
-            output.textContent =
-            "Unable to connect to backend.";
-
+            return;
         }
 
-        loader.classList.add(
-            "hidden"
-        );
+        document
+            .getElementById("output")
+            .textContent =
+            data.email;
 
     }
-);
 
-copyBtn.addEventListener(
-    "click",
-    () => {
+    catch (error) {
 
-        navigator.clipboard.writeText(
-            output.textContent
-        );
-
-        alert(
-            "Email copied successfully"
-        );
-
+        document
+            .getElementById("output")
+            .textContent =
+            error;
     }
-);
+}
 
-downloadBtn.addEventListener(
-    "click",
-    () => {
 
-        const blob =
+function copyEmail() {
+
+    const text =
+        document
+            .getElementById("output")
+            .textContent;
+
+    navigator.clipboard.writeText(text);
+
+    alert("Copied");
+}
+
+
+function downloadEmail() {
+
+    const text =
+        document
+            .getElementById("output")
+            .textContent;
+
+    const blob =
         new Blob(
-            [output.textContent],
+            [text],
             {
-                type:"text/plain"
+                type: "text/plain"
             }
         );
 
-        const link =
-        document.createElement(
-            "a"
-        );
+    const a =
+        document.createElement("a");
 
-        link.href =
-        URL.createObjectURL(
-            blob
-        );
+    a.href =
+        URL.createObjectURL(blob);
 
-        link.download =
-        "generated_email.txt";
+    a.download =
+        "email.txt";
 
-        link.click();
-
-    }
-);
+    a.click();
+}
