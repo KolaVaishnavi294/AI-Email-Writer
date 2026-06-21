@@ -1,33 +1,20 @@
-import os
-
-import google.generativeai as genai
-
 from dotenv import load_dotenv
+from google import genai
+import os
 
 load_dotenv()
 
-API_KEY = os.getenv(
-    "GEMINI_API_KEY"
+client = genai.Client(
+    api_key=os.getenv("GEMINI_API_KEY")
 )
 
-genai.configure(
-    api_key=API_KEY
-)
-
-model = genai.GenerativeModel(
-    "gemini-1.5-flash"
-)
-
-def generate_email(
-    purpose,
-    details,
-    tone
-):
+def generate_email_content(
+        purpose,
+        details,
+        tone):
 
     prompt = f"""
-You are a professional email writer.
-
-Generate a complete email.
+Write a professional email.
 
 Purpose:
 {purpose}
@@ -38,34 +25,14 @@ Details:
 Tone:
 {tone}
 
-Requirements:
-
-1. Generate subject line.
-
-2. Generate proper greeting.
-
-3. Generate professional body.
-
-4. Generate closing statement.
-
-5. Keep formatting clean.
-
-6. Return only email content.
-
-Example:
-
-Subject: Example Subject
-
-Dear Sir/Madam,
-
-Body...
-
-Regards,
-Name
+Generate:
+Subject:
+Body:
 """
 
-    response = model.generate_content(
-        prompt
+    response = client.models.generate_content(
+        model="gemini-2.5-flash",
+        contents=prompt
     )
 
     return response.text

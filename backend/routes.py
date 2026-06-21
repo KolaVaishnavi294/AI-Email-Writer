@@ -2,65 +2,48 @@ from flask import Blueprint
 from flask import request
 from flask import jsonify
 
-from utils import generate_email
+from utils import generate_email_content
 
 email_bp = Blueprint(
     "email_bp",
     __name__
 )
 
+
 @email_bp.route(
-    "/generate",
+    "/generate-email",
     methods=["POST"]
 )
-
-def generate():
+def generate_email():
 
     try:
 
+        # print("REQUEST RECEIVED")
+
         data = request.get_json()
 
-        purpose = data.get(
-            "purpose",
-            ""
-        ).strip()
+        purpose = data.get("purpose")
+        details = data.get("details")
+        tone = data.get("tone")
 
-        details = data.get(
-            "details",
-            ""
-        ).strip()
+        # print(purpose)
+        # print(details)
+        # print(tone)
 
-        tone = data.get(
-            "tone",
-            "Professional"
-        )
-
-        if not purpose:
-
-            return jsonify({
-                "error":
-                "Purpose is required"
-            }),400
-
-        if not details:
-
-            return jsonify({
-                "error":
-                "Details are required"
-            }),400
-
-        email = generate_email(
+        email_text = generate_email_content(
             purpose,
             details,
             tone
         )
 
         return jsonify({
-            "email":email
+            "email": email_text
         })
 
     except Exception as e:
 
+        print("ERROR =", e)
+
         return jsonify({
-            "error":str(e)
-        }),500
+            "error": str(e)
+        }), 500
