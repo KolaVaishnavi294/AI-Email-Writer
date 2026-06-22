@@ -1,10 +1,10 @@
-# AI Email Writer
+# AI-Powered Email Writer
 
 ## Project Overview
 
-AI Email Writer is a Generative AI-powered application that helps users create professional emails based on their purpose, key details, and preferred tone.
+AI-Powered Email Writer is a Generative AI-based web application that helps users create professional emails based on their purpose, key details, and preferred tone.
 
-The application generates a complete email including both the subject and body, making communication faster and more efficient.
+The application generates a complete email including a subject line and email body, making communication faster, easier, and more professional.
 
 ---
 
@@ -20,6 +20,25 @@ The main objectives of this project are:
 
 ---
 
+## Architecture
+```text
+User
+ ↓
+Frontend (HTML/CSS/JS)
+ ↓
+Fetch API
+ ↓
+Flask Backend
+ ↓
+Gemini API
+ ↓
+Generated Email
+ ↓
+Frontend Display
+```
+
+---
+
 ## Features
 
 ### Input Handling
@@ -30,15 +49,17 @@ The main objectives of this project are:
 
 ### AI Email Generation
 
-* Generate email subject.
+* Generate professional email subject.
 * Generate complete email body.
 * Customize output based on selected tone.
 
-### Output Display
+### Output Handling
 
 * Display generated email.
-* Copy generated content.
-* Download generated email (future enhancement).
+* Copy generated email to clipboard.
+* Download generated email as a text file.
+* Clear form inputs.
+* Character counter for user input.
 
 ---
 
@@ -57,7 +78,7 @@ The main objectives of this project are:
 
 ### AI Integration
 
-* OpenAI API (or any LLM API)
+* Google Gemini API
 
 ### Version Control
 
@@ -93,13 +114,13 @@ ai-email-writer/
 
 ## Application Flow
 
-1. User enters email purpose.
-2. User enters email details.
-3. User selects email tone.
-4. Frontend sends data to backend.
-5. Backend sends prompt to AI API.
-6. AI generates email content.
-7. Generated email is displayed to the user.
+1. User enters email purpose, details and selects email tone.
+3. Frontend sends data to backend using Fetch API.
+4. Backend processes the request using Flask.
+5. Backend sends a prompt to Google Gemini API.
+6. Gemini generates email content.
+7. Generated email is returned to the frontend.
+8. User can copy or download the generated email.
 
 ---
 
@@ -107,6 +128,14 @@ ai-email-writer/
 
 * Email templates
 * Multi-language support
-* Grammar correction
-* Save email drafts
-* Email export functionality
+* Email history
+* PDF export functionality
+* Email draft management
+
+---
+
+## Developer
+
+Vaishnavi Kola
+
+AI-Powered Email Writer using HTML, CSS, JavaScript, Flask, Python, and Google Gemini API.
