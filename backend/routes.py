@@ -42,7 +42,7 @@ def generate_email():
 
     except Exception as e:
 
-        print("ERROR =", e)
+        print("FULL ERROR =", e)
 
         return jsonify({
             "error": str(e)

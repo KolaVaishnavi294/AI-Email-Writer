@@ -14,9 +14,9 @@ def generate_email_content(
         tone):
 
     prompt = f"""
-        You are a professional corporate email writer.
+        You are an expert email writer.
 
-        Generate a complete email.
+        Write a realistic email in simple English.
 
         Purpose:
         {purpose}
@@ -27,14 +27,17 @@ def generate_email_content(
         Tone:
         {tone}
 
-        Requirements:
+        Rules:
 
-        - Create a professional subject line.
-        - Create a proper greeting.
-        - Write a clear and professional email body.
-        - Add a suitable closing.
+        - Use simple and natural English.
+        - Understand who is sending the email and who is receiving it from the details.
+        - The subject should only describe the purpose of the email.
+        - Never include sender information in the subject.
+        - Do not invent names, dates, roles, or organizations.
         - Do not use placeholders.
-        - Return only the final email.
+        - If information is missing, do not mention it.
+        - Write like a real person, not like an AI assistant.
+        - Return only the email.
         """
     
     response = client.models.generate_content(
