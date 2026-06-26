@@ -18,32 +18,51 @@ def generate_email():
 
     try:
 
-        # print("REQUEST RECEIVED")
-
         data = request.get_json()
 
-        purpose = data.get("purpose")
-        details = data.get("details")
-        tone = data.get("tone")
+        purpose = data.get(
+            "purpose"
+        )
 
-        # print(purpose)
-        # print(details)
-        # print(tone)
+        recipient = data.get(
+            "recipient"
+        )
 
-        email_text = generate_email_content(
-            purpose,
-            details,
-            tone
+        details = data.get(
+            "details"
+        )
+
+        tone = data.get(
+            "tone"
+        )
+
+        length = data.get(
+            "length"
+        )
+
+        email_text = (
+            generate_email_content(
+                purpose,
+                recipient,
+                details,
+                tone,
+                length
+            )
         )
 
         return jsonify({
-            "email": email_text
+            "email":
+            email_text
         })
 
     except Exception as e:
 
-        print("FULL ERROR =", e)
+        print(
+            "FULL ERROR =",
+            e
+        )
 
         return jsonify({
-            "error": str(e)
+            "error":
+            str(e)
         }), 500

@@ -5,41 +5,61 @@ import os
 load_dotenv()
 
 client = genai.Client(
-    api_key=os.getenv("GEMINI_API_KEY")
+    api_key=os.getenv(           #gets gemini api key from my system
+        "GEMINI_API_KEY"
+    )
 )
+
 
 def generate_email_content(
         purpose,
+        recipient,
         details,
-        tone):
+        tone,
+        length):
+
+    if length == "1":
+        email_length = "Short"
+
+    elif length == "2":
+        email_length = "Medium"
+
+    else:
+        email_length = "Detailed"
 
     prompt = f"""
-        You are an expert email writer.
+You are an expert email writer.
 
-        Write a realistic email in simple English.
+Write a realistic email in simple English.
 
-        Purpose:
-        {purpose}
+Purpose:
+{purpose}
 
-        Details:
-        {details}
+Recipient:
+{recipient}
 
-        Tone:
-        {tone}
+Details:
+{details}
 
-        Rules:
+Tone:
+{tone}
 
-        - Use simple and natural English.
-        - Understand who is sending the email and who is receiving it from the details.
-        - The subject should only describe the purpose of the email.
-        - Never include sender information in the subject.
-        - Do not invent names, dates, roles, or organizations.
-        - Do not use placeholders.
-        - If information is missing, do not mention it.
-        - Write like a real person, not like an AI assistant.
-        - Return only the email.
-        """
-    
+Email Length:
+{email_length}
+
+Rules:
+
+- Use simple and natural English.
+- Understand who is sending the email and who is receiving it.
+- Write a meaningful subject line.
+- Never include sender details in the subject.
+- Do not invent names, dates, companies, or organizations.
+- Do not use placeholders.
+- If information is missing, ignore it.
+- Write like a real person.
+- Return only the final email.
+"""
+
     response = client.models.generate_content(
         model="gemini-2.5-flash",
         contents=prompt

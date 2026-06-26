@@ -17,88 +17,288 @@
 
 <body>
 
-<div class="container">
+<div class="main-container">
 
-    <div class="card">
+    <!-- ================= SIDEBAR ================= -->
 
-        <div class="hero">
+    <div class="sidebar">
 
-            <h1>📧 AI-Powered Email Writer</h1>
+        <div class="logo">
+
+            <div class="logo-icon">
+                📧
+            </div>
+
+            <div class="logo-text">
+
+                <h2>AI Email Writer</h2>
+
+            </div>
+
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="quick">
+            QUICK TEMPLATES
+        </div>
+
+        <button onclick="loadTemplate('leave')">
+            📄 Leave Request
+        </button>
+
+        <button onclick="loadTemplate('job')">
+            💼 Job Application
+        </button>
+
+        <button onclick="loadTemplate('meeting')">
+            📅 Meeting Request
+        </button>
+
+        <button onclick="loadTemplate('thanks')">
+            ❤️ Thank You Note
+        </button>
+
+        <button onclick="loadTemplate('complaint')">
+            ⚠ Complaint Email
+        </button>
+
+        <div class="bottom-card">
+
+            <h4>✨ Write Better Emails</h4>
 
             <p>
-                Generate professional emails using an AI-powered email generation system
+                Save time and generate professional emails instantly.
             </p>
 
         </div>
 
-        <label>Email Purpose</label>
+    </div>
 
-        <input
-            type="text"
-            id="purpose"
-            placeholder="Example: Leave Request, Job Application, Meeting Request...">
+    <!-- ================= CONTENT ================= -->
 
-        <label>Key Details</label>
+    <div class="content">
 
-        <textarea
-            id="details"
-            rows="6"
-            placeholder="Enter all details here">
-        </textarea>
+        <!-- ================= FORM SECTION ================= -->
 
-        <p id="charCount">
-            Characters: 0
-        </p>
+        <div class="form-section">
 
-        <label>Select Tone</label>
+            <div class="top-header">
 
-        <select id="tone">
+                <h2>
+                    📨 New Email
+                </h2>
 
-            <option>Formal</option>
+                <div class="header-buttons">
 
-            <option>Professional</option>
+                    <button onclick="clearForm()">
+                        🔄 Clear
+                    </button>
 
-            <option>Polite</option>
+                    <button onclick="copyEmail()">
+                        📋 Copy
+                    </button>
 
-            <option>Casual</option>
+                    <div class="dropdown">
 
-        </select>
+                            <button class="download-btn"
+                                    onclick="toggleDownloadMenu()">
 
-        <div class="button-group">
+                                ⬇ Download
 
-            <button onclick="generateEmail()">
-                Generate Email
-            </button>
+                            </button>
 
-            <button onclick="copyEmail()">
-                Copy
-            </button>
+                            <div id="downloadMenu"
+                                class="download-menu">
 
-            <button onclick="downloadEmail()">
-                Download
-            </button>
+                                <div onclick="downloadEmail('txt')">
+                                    📄 TXT File
+                                </div>
 
-            <button onclick="clearForm()">
-                Clear
-            </button>
+                                <div onclick="downloadEmail('pdf')">
+                                    📕 PDF File
+                                </div>
+
+                                <div onclick="downloadEmail('doc')">
+                                    📝 DOC File
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    <button class="generate-btn"
+                            onclick="generateEmail()">
+                        ✨ Generate
+                    </button>
+
+                </div>
+
+            </div>
+
+            <!-- PURPOSE -->
+
+            <label>Email Purpose</label>
+
+            <input
+                type="text"
+                id="purpose"
+                placeholder="Leave Request, Job Application...">
+
+            <!-- RECIPIENT -->
+
+            <label>Recipient</label>
+
+            <input
+                type="text"
+                id="recipient"
+                placeholder="Manager, Principal, HR...">
+
+            <!-- DETAILS -->
+
+            <label>Key Details</label>
+
+            <textarea
+                id="details"
+                rows="6"
+                placeholder="Enter details here...">
+            </textarea>
+
+            <p id="charCount">
+                Characters: 0
+            </p>
+
+            <!-- TONE -->
+
+            <label>Select Tone</label>
+
+            <div class="tone-container">
+
+                <div class="tone-card active"
+                     onclick="setTone(this,'Professional')">
+
+                    🤝 Professional
+
+                </div>
+
+                <div class="tone-card"
+                     onclick="setTone(this,'Polite')">
+
+                    🙏 Polite
+
+                </div>
+
+                <div class="tone-card"
+                     onclick="setTone(this,'Casual')">
+
+                    😊 Casual
+
+                </div>
+
+                <div class="tone-card"
+                     onclick="setTone(this,'Urgent')">
+
+                    ⚡ Urgent
+
+                </div>
+
+            </div>
+
+            <input
+                type="hidden"
+                id="tone"
+                value="Professional">
+
+            <!-- EMAIL LENGTH -->
+
+            <div class="email-length">
+
+                <label>Email Length</label>
+
+                <input
+                    type="range"
+                    id="length"
+                    min="1"
+                    max="3"
+                    value="2">
+
+                <div class="length-labels">
+
+                    <span>Short</span>
+
+                    <span>Medium</span>
+
+                    <span>Detailed</span>
+
+                </div>
+
+            </div>
 
         </div>
 
-        <h2>Generated Email</h2>
+        <!-- ================= OUTPUT SECTION ================= -->
 
-        <pre id="output">
-            🚀 Your AI-generated email will appear here...
-        </pre>
+        <div class="output-section">
 
-        <div class="footer">
+            <div class="email-header">
 
-            © 2026 AI Email Writer | Developed by Vaishnavi Kola
+                <h2>
+                    ✉ Generated Email
+                </h2>
+
+            </div>
+
+            <!-- EMPTY STATE -->
+
+            <div id="empty-state">
+
+                <div class="empty-icon">
+                    📩
+                </div>
+
+                <h3>
+                    Your email will appear here
+                </h3>
+
+                <p>
+                    Fill in the details and click Generate to get started.
+                </p>
+
+            </div>
+
+            <!-- OUTPUT LOADER -->
+
+            <div id="loader"
+                 class="output-loader">
+
+                <div class="spinner"></div>
+
+                <p>
+                    Generating Email...
+                </p>
+
+            </div>
+
+            <!-- GENERATED EMAIL -->
+
+            <pre id="output"></pre>
 
         </div>
 
     </div>
 
 </div>
+
+<!-- TOAST MESSAGE -->
+
+<div id="toast"></div>
+
+<!-- DARK MODE BUTTON -->
+
+<button class="theme-btn"
+        onclick="toggleTheme()">
+    🌙
+</button>
 
 <script src="js/script.js"></script>
 
